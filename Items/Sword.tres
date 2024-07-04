@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bwhsylgt8x2lm"]
+
+[ext_resource type="Script" path="res://Scripts/inventory/ItemData.gd" id="1_ue0nj"]
+[ext_resource type="Texture2D" uid="uid://dlevb575x6uly" path="res://Art/16x16 RPG Item Pack/Item__00.png" id="2_b0mhg"]
+
+[resource]
+script = ExtResource("1_ue0nj")
+name = "Sword"
+description = "Do you know how to use it?"
+texture = ExtResource("2_b0mhg")

@@ -1,0 +1,150 @@
+[gd_scene load_steps=8 format=3 uid="uid://bn8jg34ysdrad"]
+
+[ext_resource type="Script" path="res://Scripts/title_screen.gd" id="1_eth4v"]
+[ext_resource type="PackedScene" uid="uid://bg7405ng15145" path="res://Scenes/transition_scene.tscn" id="2_jikrt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_deoaq"]
+bg_color = Color(0.227451, 0.313726, 0.121569, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.101961, 0.258824, 0.14902, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t7vpo"]
+bg_color = Color(0.109804, 0.117647, 0.0470588, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0424996, 0.0471457, 0.0134272, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ui5wi"]
+bg_color = Color(0.0915858, 0.0985648, 0.0358154, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0424996, 0.0471457, 0.0134272, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfj54"]
+bg_color = Color(0.0915858, 0.0985648, 0.0358154, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_color = Color(0.0424996, 0.0471457, 0.0134272, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ly5kf"]
+bg_color = Color(0.0915858, 0.0985648, 0.0358154, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0424996, 0.0471457, 0.0134272, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eth4v")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -35.0
+offset_top = -21.0
+offset_right = 1204.0
+offset_bottom = 665.0
+color = Color(0.282353, 0.435294, 0.156863, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -37.0
+offset_right = 120.0
+offset_bottom = 107.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="LoadGame" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_pressed_color = Color(0.301961, 0.470588, 0.317647, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_deoaq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_t7vpo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ui5wi")
+text = "Load Game"
+
+[node name="NewGame" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_pressed_color = Color(0.303322, 0.472317, 0.317037, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_deoaq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_t7vpo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vfj54")
+text = "New Game"
+
+[node name="Controls" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_pressed_color = Color(0.303322, 0.472317, 0.317037, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_deoaq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_t7vpo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ly5kf")
+text = "Controls
+"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -323.5
+offset_top = -210.5
+offset_right = 323.5
+offset_bottom = -73.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/bold_font_size = 100
+bbcode_enabled = true
+text = "[center][b]Game Title"
+
+[node name="TransitionScene" parent="." instance=ExtResource("2_jikrt")]
+visible = false
+
+[connection signal="pressed" from="VBoxContainer/LoadGame" to="." method="_on_load_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/Controls" to="." method="_on_controls_pressed"]

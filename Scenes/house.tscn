@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://mhlew28hojrp"]
+
+[ext_resource type="Texture2D" uid="uid://cx4ggxys65ub7" path="res://Art/House_01.png" id="1_2lg64"]
+[ext_resource type="Script" path="res://Scripts/house.gd" id="1_cuksp"]
+[ext_resource type="PackedScene" uid="uid://bg7405ng15145" path="res://Scenes/transition_scene.tscn" id="3_qxglg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4yyun"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_owp22"]
+size = Vector2(48, 15)
+
+[node name="house" type="StaticBody2D"]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_cuksp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -13)
+texture = ExtResource("1_2lg64")
+
+[node name="enterHouseArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enterHouseArea"]
+position = Vector2(10, 12)
+shape = SubResource("RectangleShape2D_4yyun")
+debug_color = Color(0.643137, 0.462745, 0.65098, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_owp22")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TransitionScene" parent="CanvasLayer" instance=ExtResource("3_qxglg")]
+
+[connection signal="body_entered" from="enterHouseArea" to="." method="_on_enter_house_area_body_entered"]
+[connection signal="body_exited" from="enterHouseArea" to="." method="_on_enter_house_area_body_exited"]

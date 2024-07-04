@@ -1,0 +1,147 @@
+[gd_scene load_steps=7 format=3 uid="uid://bllj5ag2u3v4t"]
+
+[ext_resource type="Script" path="res://Scripts/DeathCutscene.gd" id="1_cgo4j"]
+
+[sub_resource type="Animation" id="Animation_ji87f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeathCutscene/CanvasLayer/DownBar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, 674)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DeathCutscene/CanvasLayer/UpBar:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, -122)]
+}
+
+[sub_resource type="Animation" id="Animation_hlffl"]
+resource_name = "black_bars_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeathCutscene/CanvasLayer/UpBar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-5, -122), Vector2(-5, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DeathCutscene/CanvasLayer/DownBar:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-5, 674), Vector2(-5, 543)]
+}
+
+[sub_resource type="Animation" id="Animation_jwhqn"]
+resource_name = "black_bars_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeathCutscene/CanvasLayer/UpBar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-5, -3), Vector2(-5, -122)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DeathCutscene/CanvasLayer/DownBar:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-5, 543), Vector2(-5, 674)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yl7rh"]
+_data = {
+"RESET": SubResource("Animation_ji87f"),
+"black_bars_in": SubResource("Animation_hlffl"),
+"black_bars_out": SubResource("Animation_jwhqn")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2btow"]
+radius = 25.02
+
+[node name="DeathCutscene" type="Node2D"]
+script = ExtResource("1_cgo4j")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 13
+emission_shape = 1
+emission_sphere_radius = 8.25
+gravity = Vector2(0, 0)
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+color = Color(1, 0.172549, 0.0941176, 1)
+
+[node name="Timer" type="Timer" parent="CPUParticles2D"]
+wait_time = 2.0
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UpBar" type="ColorRect" parent="CanvasLayer"]
+visible = false
+offset_left = -5.0
+offset_top = -122.0
+offset_right = 1157.0
+offset_bottom = -19.0
+color = Color(0, 0, 0, 1)
+
+[node name="DownBar" type="ColorRect" parent="CanvasLayer"]
+visible = false
+offset_left = -5.0
+offset_top = 674.0
+offset_right = 1161.0
+offset_bottom = 786.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_yl7rh")
+}
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("CircleShape2D_2btow")
+debug_color = Color(0.745098, 0.427451, 0.470588, 0.419608)
+
+[connection signal="timeout" from="CPUParticles2D/Timer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="InteractArea" to="." method="_on_interact_area_body_entered"]
