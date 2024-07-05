@@ -46,6 +46,7 @@ func _ready():
 	DialogueManager.dialogue_ended.connect(_on_dialogue_manager_dialogue_ended)
 	label.text = "E"
 	set_house(null)
+	Global.is_saving.connect(_on_saving)
 
 func check_rage():
 	if bloodBar.value == bloodBar.max_value:
@@ -83,3 +84,6 @@ func _physics_process(_delta):
 
 func _on_dialogue_manager_dialogue_ended(_resource: DialogueResource):
 	can_move = true
+	
+func _on_saving():
+	save_stats()

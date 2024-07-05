@@ -11,17 +11,20 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
-
-
-func _on_load_game_pressed():
-	pass # Replace with function body.
-
-
-func _on_new_game_pressed():
+	
+func start_game():
 	Transition.visible = true;
 	TransitionAnim.play("fade_in")
 	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file("res://Scenes/main.tscn")
+
+func _on_load_game_pressed():
+	Global.load_data()
+	start_game()
+
+
+func _on_new_game_pressed():
+	start_game()
 
 
 func _on_controls_pressed():

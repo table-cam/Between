@@ -9,7 +9,6 @@ func _ready():
 	TransitionAnim.play("fade_out")
 	$Player.global_position = Global.player_pos
 	$Player.bloodBar.value = Global.rage_level
-	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

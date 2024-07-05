@@ -1,1 +1,16 @@
 res://Scenes/main.tscn
+res://Scenes/house.tscn
+res://Scenes/player.tscn
+res://Scenes/transition_scene.tscn
+res://Scenes/title_screen.tscn
+res://Scenes/npc.tscn
+res://Scenes/balloon.tscn
+res://Scenes/inventory.tscn
+res://Scripts/PauseMenu.gd
+res://Scenes/pause_menu.tscn
+res://Scripts/global.gd
+res://PlayerData.gd
+res://Scripts/PlayerData.gd
+res://Scripts/title_screen.gd
+res://Scripts/player.gd
+res://Scripts/main.gd
